@@ -1,0 +1,30 @@
+NFCGate Server rewrite in GoLang
+
+On relaying a NXP DESFire EV1 python version took me ~35s to do a full scan using NXP's TagInfo android app.
+The GoLang version took ~16s to do the same.
+
+However, GoLang version of NFCGate's server don't care about your session number. It also doesn't support
+plugins.
+
+==========
+
+Building and running the server -
+
+    make deps
+    make
+    make run # if you want to run the executable
+
+==========
+
+The workflow -
+1. Run the server and define the host, port and log arguments
+    make
+    ./builds/nfcgate_server_go [-host <host>] [-port <port>] ([-log <filename.log>] | [-lograw <filename.gob>])
+
+2. if you're logging raw bytes then you must run the following to get a log file
+    python3 gobdecode.py <filename.gob>
+
+==========
+
+Future - 
+1. (DONE) Ability for the server to emulate user defined frames to PICC/PCD during a session.
